@@ -6,32 +6,32 @@ const { Server } = require("socket.io");
 app.use(cors());
 
 const PORT = 3001;
-const server = http.createServer(app)
+const server = http.createServer(app);
 
-const io = new Server(server, {
+const io = new Server(server, { 
     cors: {
         origin: `http://localhost:${PORT}`,
-        methods: ["GET", "POST"],
+        methods: ["GET", "POST"], //Déclare les méthodes autorisées
     }
-})
+});
 
 io.on("connection", (socket) => { //Cette fonction sert à donner un ID aux personnes connectés
-    console.log(`L'utilisateur ${socket.id} s'est connecté`)
+    console.log(`L'utilisateur ${socket.id} s'est connecté`);
 
     socket.on("join_room", (data) => { //Rejoindre une room
-        socket.join(data)
-        console.log(`L'utilisateur : ${socket.id} à rejoin la room: ${data}`)
+        socket.join(data);
+        console.log(`L'utilisateur : ${socket.id} à rejoin la room: ${data}`);
     });
 
-    socket.on("send_message", (data) => {
-        console.log(data)
+    socket.on("send_message", (data) => { //Envoi le message vers la room ou le message à été écrit
+        socket.to(data.room).emit("receive_message", data); 
     });
 
     socket.on("disconnect", () => { //Déconnexion
-        console.log(`L'utilisateur ${socket.id} s'est déconnecté`)
+        console.log(`L'utilisateur ${socket.id} s'est déconnecté`);
     });
-})
+});
 
 server.listen(PORT, () => {
-    console.log(`Serveur lancé sur le port ${PORT}`)
+    console.log(`Serveur lancé sur le port ${PORT}`);
 });

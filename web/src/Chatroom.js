@@ -10,11 +10,13 @@ const socket = io.connect(`http://localhost:${{PORT}}`) //Pour connecter le fron
 //Cette page c'est juste pour tester socket.io le design on le refera
 const Chatroom = () => {
     const [username, setUsername] = useState("");
-    const [room, setRoom] = useState("")
+    const [room, setRoom] = useState("");
+    const [showChat, setShowChat] = useState(false);
 
     const joinRoom = () => {
         if (username !== "" && room !== "") {
             socket.emit("join_room", room);
+            setShowChat(true);
         }
     }
 
@@ -24,7 +26,8 @@ const Chatroom = () => {
         <>
         <main>
             <Container maxWidth="md">
-                <Card>
+                {!showChat ? (
+                    <Card>
                     <CardContent>
                         <h1 variant="h1"> Chatroom </h1>
                         <div className="room-field">
@@ -50,7 +53,10 @@ const Chatroom = () => {
                         <Button onClick={joinRoom} variant="contained"> Rejoindre une room </Button>
                     </CardContent>
                 </Card>
+                )
+                :(
                 <Chat socket={socket} username={username} room={room}/>
+                )}
             </Container>
         </main>
         </>
