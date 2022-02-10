@@ -1,15 +1,37 @@
-const app = require('express');
-const http = require('http').createServer(app)
-const io = require('socket.io')(http)
+const express = require('express');
+const app = express();
+const http = require('http');
+const cors = require('cors'); //cors permet de régler des problèmes de connexion
+const { Server } = require("socket.io");
+app.use(cors());
 
-const port = 4000;
+const PORT = 3001;
+const server = http.createServer(app)
 
-io.on('connection', socket => {
-    socket.on('message', ({name, message}) => {
-        io.emit('message', {name, message})
-    })
+const io = new Server(server, {
+    cors: {
+        origin: `http://localhost:${PORT}`,
+        methods: ["GET", "POST"],
+    }
 })
 
-http.listen(port, function() {
-    console.log(`Écoute du port ${port} !`)
+io.on("connection", (socket) => { //Cette fonction sert à donner un ID aux personnes connectés
+    console.log(`L'utilisateur ${socket.id} s'est connecté`)
+
+    socket.on("join_room", (data) => { //Rejoindre une room
+        socket.join(data)
+        console.log(`L'utilisateur : ${socket.id} à rejoin la room: ${data}`)
+    });
+
+    socket.on("send_message", (data) => {
+        console.log(data)
+    });
+
+    socket.on("disconnect", () => { //Déconnexion
+        console.log(`L'utilisateur ${socket.id} s'est déconnecté`)
+    });
 })
+
+server.listen(PORT, () => {
+    console.log(`Serveur lancé sur le port ${PORT}`)
+});
