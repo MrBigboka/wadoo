@@ -5,7 +5,7 @@ import { Container, CardContent, Card, TextField, Button } from '@material-ui/co
 
 const PORT = 3001;
 
-const socket = io.connect(`http://localhost:${{PORT}}`) //Pour connecter le frontend au backend
+const socket = io.connect(`http://localhost:${PORT}`) //Pour connecter le frontend au backend
 
 //Cette page c'est juste pour tester socket.io le design on le refera
 const Chatroom = () => {

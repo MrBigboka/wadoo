@@ -48,14 +48,13 @@ const Chat = ({socket, username, room}) => {
                 })}
             <div className="chat-footer"> 
                 <TextField 
-                    type="text" 
-                    placeholder="Hello.."
-                    value={message}
-                    onChange={(event) => {
-                        setMessage=(event.target.value);
-                    }}
-                    onKeyPress={(event) => 
-                        {event.key === 'Enter' && sendMessage()
+                    name="message" 
+                    placeholder="Écrire un message..."
+                    onChange={ e => 
+                        setMessage(e.target.value)
+                    }
+                    onKeyPress={(event) => {
+                        event.key === 'Enter' && sendMessage();
                     }}
                 />
                 <Button onClick={sendMessage}>&#9658;</Button>
@@ -64,4 +63,4 @@ const Chat = ({socket, username, room}) => {
     )
 }
 
-export default Chat
+export default Chat;
