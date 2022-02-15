@@ -31,7 +31,7 @@ const Chat = ({socket, username, room}) => {
         socket.on("receive_message", (data) => {
             setMessageList((liste) => [...liste, data]); 
             //... permet de garder la liste de message et ajouter le nouveau message
-        })
+        })  
     }, [socket]);
 
     return (
@@ -49,6 +49,7 @@ const Chat = ({socket, username, room}) => {
             <div className="chat-footer"> 
                 <TextField 
                     name="message" 
+                    value={message}
                     placeholder="Écrire un message..."
                     onChange={ e => 
                         setMessage(e.target.value)

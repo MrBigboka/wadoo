@@ -1,7 +1,10 @@
 //import React, {useEffect, useState} from "react";
 import { Typography, CssBaseline, Container, Button, Stack} from '@mui/material';
-//import {serveur} from "./constantes"
+import Wadoo from './media/Wadoo2.png'
 import useStyles from './styles';
+import { Link } from "react-router-dom";
+
+//import {serveur} from "./constantes"
 
 const Home = () => {
     const classes = useStyles(); 
@@ -11,9 +14,12 @@ const Home = () => {
         <main>
             <div className={classes.container}>
                 <Container maxWidth="sm">
-                    <Typography align="center" variant="h1" gutterBottom>
-                        Wadoo
-                    </Typography>
+                    <img style={{
+                        maxWidth: '100%',
+                        height: 'auto',
+                    }} 
+                        alt='Wadoo'
+                        src={Wadoo}/> 
                     <Typography variant="h5" align="center" color="text.secondary" paragraph>
                         Bienvenue sur Wadoo. Le site numéro 1 pour faire de nouvelles connaissances !    
                     </Typography>
@@ -23,8 +29,9 @@ const Home = () => {
                         spacing={1}
                         justifyContent="center"
                     >
-                        <Button variant="contained">S'inscrire</Button>
-                        <Button variant="outlined">Se connecter</Button>
+                    <Link className={classes.styleRemover} to="/chatroom"> 
+                        <Button size='large' variant="contained"> Clavarder Maintenant </Button>
+                    </Link>
                     </Stack>
                 </Container>
             </div>

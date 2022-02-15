@@ -10,7 +10,7 @@ const server = http.createServer(app);
 
 const io = new Server(server, { 
     cors: {
-        origin: 'http://localhost:3000', //port sur lequel le web run
+        origin: 'http://localhost:3000',
         methods: ["GET", "POST"], //Déclare les méthodes autorisées
     }
 });
@@ -21,6 +21,7 @@ io.on("connection", (socket) => { //Cette fonction sert à donner un ID aux pers
     socket.on("join_room", (data) => { //Rejoindre une room
         socket.join(data);
         console.log(`L'utilisateur : ${socket.id} a rejoint la room: ${data}`);
+        console.log(io.sockets.adapter.rooms) //Liste des rooms voir lundi comment envoyer ca du coté client
     });
 
     socket.on("send_message", (data) => { //Envoi le message vers la room ou le message à été écrit
