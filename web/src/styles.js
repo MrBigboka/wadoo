@@ -18,6 +18,25 @@ const useStyles = makeStyles((theme) => ({
         height: '500px',
         width: '1000px'
     },
+    inputText: {
+        color: 'rgba(0,0,0,0.87)',
+        fontSize: '16px',
+        letterSpacing: '0.5px',
+        lineHeight: '28px',
+        textAlign: 'center',
+    },
+    title: {
+        marginBottom: '70px',
+        color: '#2196f3'
+    },
+    cardContent: {
+        flexGrow: 5,
+    },
+    card: {
+        width: '30pc',
+        height: '30pc',
+        display: 'flex',
+    },
 }));
 
 export default useStyles
