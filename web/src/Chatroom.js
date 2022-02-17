@@ -9,7 +9,7 @@ import AccountCircle from '@mui/icons-material/AccountCircle';
 
 const PORT = 3001;
 
-const socket = io.connect(`http://localhost:${PORT}`) //Pour connecter le frontend au backend
+const socket = io.connect(`http://localhost:${PORT}`); //Pour connecter le frontend au backend
 
 //Cette page c'est juste pour tester socket.io le design on le refera
 const Chatroom = () => {
@@ -90,6 +90,7 @@ const Chatroom = () => {
                                 <div className="room-field" style={{ textAlign: 'center'}}>
                                     <TextField 
                                         name="name"
+                                        required
                                         id="filled-hidden-label-normal"
                                         InputProps={{
                                             startAdornment: (

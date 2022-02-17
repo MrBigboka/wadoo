@@ -26,8 +26,16 @@ const useStyles = makeStyles((theme) => ({
         textAlign: 'center',
     },
     title: {
-        marginBottom: '70px',
+        marginBottom: '3pc',
         color: '#2196f3'
+    },
+    chatFooter: {
+        marginTop: '24.5pc',
+
+    },
+    chatInput: {
+        marginRight: '1pc',
+        width: '26pc'
     },
     cardContent: {
         flexGrow: 5,
@@ -36,6 +44,15 @@ const useStyles = makeStyles((theme) => ({
         width: '30pc',
         height: '30pc',
         display: 'flex',
+    },  
+    chatCard: {
+        width: 'auto',
+        height: '100%',
+        display: 'flex',
+    },
+    VideoCard: {
+        flexGrow: 5,
+        marginBottom: '2pc',
     },
 }));
 
