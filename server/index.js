@@ -17,10 +17,12 @@ const io = new Server(server, {
 
 io.on("connection", (socket) => { //Cette fonction sert à donner un ID aux personnes connectés
     console.log(`L'utilisateur ${socket.id} s'est connecté`);
+    socket.emit('me', socket.id)
 
     socket.on("join_room", (data) => { //Rejoindre une room
         socket.join(data);
         console.log(`L'utilisateur : ${socket.id} a rejoint la room: ${data}`);
+        io.to(userToCall).emit("calluser", { signal: signalData, from, name })
         console.log(io.sockets.adapter.rooms) //Liste des rooms voir lundi comment envoyer ca du coté client
     });
 
@@ -28,8 +30,13 @@ io.on("connection", (socket) => { //Cette fonction sert à donner un ID aux pers
         socket.to(data.room).emit("receive_message", data); 
     });
 
+    socket.on("answercall", (data) => {
+        io.to(data.to).emit("callaccepted", data.signal)
+    })
+
     socket.on("disconnect", () => { //Déconnexion
         console.log(`L'utilisateur ${socket.id} s'est déconnecté`);
+        socket.broadcast.emit("callended")
     });
 });
 
