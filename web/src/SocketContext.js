@@ -9,7 +9,8 @@ const socket = io('http://localhost:3000/');
 const ContextProvider = ({ children }) => {
     const [stream, setStream] = useState(null)
     const [me, setMe] = useState('')
-    const [callAccepted, setCallAccepted] = useState(true)
+    const [callAccepted, setCallAccepted] = useState(false)
+    const [call, setCall] = useState({})
     const [callEnded, setCallEnded] = useState(false)
     const [name, setName] = useState('')
 
@@ -20,12 +21,13 @@ const ContextProvider = ({ children }) => {
 
     useEffect(() => {
 
-        navigator.mediaDevices.getUserMedia({ video: true, audio: true})
+        navigator.mediaDevices.getUserMedia({ video: true, audio: false})
             .then((currentStream) => {
                 setStream(currentStream)
 
                 myVideo.current.srcObject = currentStream
             })
+            
             socket.on('me', (id) => setMe(id))
             
             socket.on('join_room', ({ from, name: callerName, signal }) => {

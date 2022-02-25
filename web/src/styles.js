@@ -1,4 +1,5 @@
 import { makeStyles } from '@material-ui/core/styles';
+import { height } from '@mui/system';
 
 const useStyles = makeStyles((theme) => ({
     container: {
@@ -53,6 +54,10 @@ const useStyles = makeStyles((theme) => ({
     VideoCard: {
         flexGrow: 5,
         marginBottom: '2pc',
+    },
+    VideoPlayer: {
+        height: '100%',
+        width: '100%',
     },
 }));
 

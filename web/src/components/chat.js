@@ -2,6 +2,7 @@ import React, {useState, useEffect} from 'react';
 import { TextField, Button, Grid, Card, CardContent, CardMedia, Typography } from '@material-ui/core';
 import SendIcon from '@mui/icons-material/Send';    
 import useStyles from '../styles';
+import VideoPlayer from './VideoPlayer'
 
 //CSS à refaire avec MUI je le fait plus tard dans la soirée ..
 //To do : CSS / Installer react-scroll-to-bottom ou pt avec MUI il y a un scroll to bottom 
@@ -45,23 +46,13 @@ const Chat = ({socket, username, room}) => {
                     <CardContent className={classes.cardContent}>
                         <span> WebRTC Stranger </span>
                     </CardContent>
-                    <CardMedia
-                        component="img"
-                        height="194"
-                        image="https://ak.picdn.net/shutterstock/videos/1034106779/thumb/1.jpg"
-                        alt="Paella dish"
-                    />
+                    <VideoPlayer />
                 </Card>
                 <Card className={classes.VideoCard}>
                     <CardContent className={classes.cardContent}>
                         <span> WebRTC User </span>
                     </CardContent>
-                    <CardMedia
-                        component="img"
-                        height="194"
-                        image="https://media.istockphoto.com/photos/smiling-attractive-young-lady-looking-talking-to-camera-at-home-picture-id1189198083?k=20&m=1189198083&s=612x612&w=0&h=n1f3g0mT4YAqSIOIzVHMQ5HV33awuhwgE5YcPjz2J2w="
-                        alt="Paella dish"
-                    />
+                    <VideoPlayer />
                 </Card>
             </Grid> {/*Chat*/}
             <Grid item xs={8}>

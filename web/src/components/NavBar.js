@@ -30,7 +30,7 @@ export default function NavBar() {
             component="div"
             fontSize= '35px' 
             sx={{ flexGrow: 1 }}>
-            wADOO
+            WADOO
           </Typography>
           </Link>
         </Toolbar>
