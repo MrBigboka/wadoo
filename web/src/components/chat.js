@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import { TextField, Button, Grid, Card, CardContent, CardMedia, Typography } from '@material-ui/core';
+import { TextField, Button, Grid, Card, CardContent, CardMedia, Typography, Paper, List } from '@material-ui/core';
 import SendIcon from '@mui/icons-material/Send';    
 import useStyles from '../styles';
 
@@ -67,21 +67,35 @@ const Chat = ({socket, username, room}) => {
             <Grid item xs={8}>
                 <Card className={classes.Card}>
                     <CardContent className={classes.cardContent}>
-                        <div className="chat-window">
+                        <div className={classes.chatWidow}>
                             <div className="chat-header">
                                 <h1 variant="h1"> Live chat</h1>
                             </div>
-                            <div className="chat-body">
-                                <Typography variant='caption'> 
-                                    Vous discutez maintenant avec un inconnu au hasard. Pourquoi ne pas faire connaissances !
-                                </Typography>
-                                {messageList.map((data) => {
-                                    return (
-                                        <div className="message" id={username === data.author ? "you" : "other"}> 
-                                            <h5>{data.time} {data.author}: {data.message}</h5>
-                                        </div>
-                                    )
-                                })}
+                            <div className={classes.chatBody}>
+                                    <Typography variant='caption'> 
+                                        Vous discutez maintenant avec un inconnu au hasard. Pourquoi ne pas faire connaissances !
+                                    </Typography>
+                                    {messageList.map((data) => {
+                                        return (
+                                            <div
+                                                justify="flex-end"
+                                                className={classes.message}
+                                                id={username === data.author ? "you" : "other"}
+                                            >
+                                                <div>
+                                                    <div className={classes.messageMeta}>
+                                                        <p id='time'>{data.time}</p>    
+                                                        <p id='author'>{data.author}</p>
+                                                    </div>
+                                                    <div className={classes.messageContent}>
+                                                        <h4 id={username === data.author ? "you" : "other"}>
+                                                             {data.message} 
+                                                        </h4>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            );
+                                    })}
                             </div>
                             <div className={classes.chatFooter}> 
                                 <TextField 

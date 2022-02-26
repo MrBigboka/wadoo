@@ -31,7 +31,6 @@ const useStyles = makeStyles((theme) => ({
     },
     chatFooter: {
         marginTop: '24.5pc',
-
     },
     chatInput: {
         marginRight: '1pc',
@@ -53,6 +52,66 @@ const useStyles = makeStyles((theme) => ({
     VideoCard: {
         flexGrow: 5,
         marginBottom: '2pc',
+    },
+    chatBody: {
+        width: '100%',
+        height: '100%',
+        overflowY: 'scroll',
+        overflowX: 'hidden',
+    },
+    /*chatWidow: {
+        width: '100%',
+        height: '100%',
+        overflowY: 'scroll',
+        overflowX: 'hidden',
+    },*/
+    message: {
+        "& #you": {
+            justifyContent: 'flex-start'
+        },
+        "& #other": {
+            justifyContent: 'flex-end',
+        },
+    },
+    messageMeta: {
+        "& #you": {
+            justifyContent: 'flex-start',
+            marginLeft: '5px',
+          },
+        "& #other": {
+            justifyContent: 'flex-end',
+            marginRight: '5px',
+        },
+        "& #time": {
+            justifyContent: 'flex-start',
+            marginLeft: '5px',
+          },
+        "& #author": {
+            marginLeft: '10px',
+            fontWeight: 'bold',
+        },
+    },
+    messageContent: {
+        justifyContent: 'flex-start',
+        marginLeft: '5px',
+        width: 'auto',
+        height: 'auto',
+        minheight: '40px',
+        maxWidth: '120px',
+        backgroundColor: '#43a047',
+        borderRadius: '5px',
+        color: 'white',
+        display: 'flex',
+        alignItems: 'center',
+        marginRight: '5px',
+        paddingRight: '5px',
+        paddingLeft: '5px',
+        overflowWrap: 'break-word',
+        wordbreak: 'break-word',  
+        "& #other": {
+            justifyContent: 'flex-end',
+            backgroundColor: 'cornflowerblue',
+        }
     },
 }));
 
