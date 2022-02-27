@@ -29,8 +29,8 @@ const useStyles = makeStyles((theme) => ({
         marginBottom: '3pc',
         color: '#2196f3'
     },
-    chatFooter: {
-        marginTop: '24.5pc',
+    chatHeader: {
+        display: 'flex',
     },
     chatInput: {
         marginRight: '1pc',
@@ -53,34 +53,32 @@ const useStyles = makeStyles((theme) => ({
         flexGrow: 5,
         marginBottom: '2pc',
     },
-    chatBody: {
-        width: '100%',
-        height: '100%',
+    messageContainer: {
+        display: 'flex',
+        height: '100px',
         overflowY: 'scroll',
         overflowX: 'hidden',
     },
-    /*chatWidow: {
-        width: '100%',
-        height: '100%',
-        overflowY: 'scroll',
-        overflowX: 'hidden',
-    },*/
     message: {
+        width: '100%',
+        minHeight: '100px',
+        padding: '10px',
         "& #you": {
-            justifyContent: 'flex-start'
+            justifyContent: 'flex-end',
         },
         "& #other": {
-            justifyContent: 'flex-end',
+            justifyContent: 'flex-start',
         },
     },
     messageMeta: {
+        display: 'flex',
         "& #you": {
-            justifyContent: 'flex-start',
-            marginLeft: '5px',
+            marginRight: '5px',
+            justifyContent: 'flex-end',
           },
         "& #other": {
-            justifyContent: 'flex-end',
             marginRight: '5px',
+            justifyContent: 'flex-start',
         },
         "& #time": {
             justifyContent: 'flex-start',
@@ -92,27 +90,42 @@ const useStyles = makeStyles((theme) => ({
         },
     },
     messageContent: {
-        justifyContent: 'flex-start',
-        marginLeft: '5px',
-        width: 'auto',
-        height: 'auto',
-        minheight: '40px',
-        maxWidth: '120px',
-        backgroundColor: '#43a047',
-        borderRadius: '5px',
-        color: 'white',
-        display: 'flex',
-        alignItems: 'center',
-        marginRight: '5px',
-        paddingRight: '5px',
-        paddingLeft: '5px',
-        overflowWrap: 'break-word',
-        wordbreak: 'break-word',  
-        "& #other": {
+        "& #you": {
             justifyContent: 'flex-end',
+            marginLeft: '5px',
+            width: 'auto',
+            height: 'auto',
+            minHeight: '40px',
+            maxWidth: '120px',
+            borderRadius: '5px',
+            color: 'white',
+            alignItems: 'center',
+            marginRight: '5px',
+            paddingRight: '5px',
+            paddingLeft: '5px',
             backgroundColor: 'cornflowerblue',
+            overflowWrap: 'break-word',
+            wordbreak: 'break-word',  
+        },
+        "& #other": {
+            justifyContent: 'flex-start',
+            marginLeft: '5px',
+            width: 'auto',
+            height: 'auto',
+            minHeight: '40px',
+            maxWidth: '120px',
+            borderRadius: '5px',
+            color: '#202020',
+            display: 'flex',
+            alignItems: 'center',
+            marginRight: '5px',
+            paddingRight: '5px',
+            paddingLeft: '5px',
+            overflowWrap: 'break-word',
+            wordbreak: 'break-word',  
+            backgroundColor: '#D3D3D3',
         }
     },
 }));
 
-export default useStyles
+export default useStyles;

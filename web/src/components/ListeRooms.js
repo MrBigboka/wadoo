@@ -6,16 +6,38 @@ function ListeRooms({socket, username}) {
 
     const classes = useStyles(); 
     const [roomList, setRoomList] = useState([]);
+    const [webData, setWebData] = useState([]);
     
     useEffect(() => {
-        socket.on("receive_room", (data) => {
-            setRoomList((liste) => [data]); 
+        socket.on("receive_room", (data) => {
+            console.log('Data fetched', data)
+            setWebData(data);
+        });
+        socket.on('error', (err) => {
+            console.error('Error happened', err);
         })
-    }, [socket]);   
+        // remove the socket listener when component left!
+        return () => {
+            socket.close();
+        }
+    }, []);
+    // second use effect if web data changed!
+    useEffect(() => {
+        if (webData) {
+            // if webData is array of objects
+            setRoomList([...roomList, ...webData]);
+            //if webData is just objects    
+            //refresh the local state
+            setWebData([]);
+        }
+    }, [webData])
+    
+    
 
 
     return (
         <>
+        {/*roomList !== undefined &&
             <div>
                 <Grid container spacing={2}>
                     <Typography variant='h5'> Votre nom d'utilisateur est: <b> {username} </b> </Typography>
@@ -39,6 +61,7 @@ function ListeRooms({socket, username}) {
                     </Grid>
                 </Grid>
             </div>
+                            */}
         </>
     )
 }

@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from 'react';
-import { TextField, Button, Grid, Card, CardContent, CardMedia, Typography, Paper, List } from '@material-ui/core';
+import { TextField, Button, Grid, Card, CardContent, CardMedia, Typography } from '@material-ui/core';
 import SendIcon from '@mui/icons-material/Send';    
+import ScrollToBottom from 'react-scroll-to-bottom';
 import useStyles from '../styles';
 
 //CSS à refaire avec MUI je le fait plus tard dans la soirée ..
@@ -25,7 +26,7 @@ const Chat = ({socket, username, room}) => {
             };
 
             await socket.emit("send_message", messageData);
-            setMessageList((liste) => [...liste, messageData])
+            setMessageList((liste) => [...liste, messageData]);
             setMessage(""); //Le chat redeviendra vide
         }
     }
@@ -68,34 +69,35 @@ const Chat = ({socket, username, room}) => {
                 <Card className={classes.Card}>
                     <CardContent className={classes.cardContent}>
                         <div className={classes.chatWidow}>
-                            <div className="chat-header">
-                                <h1 variant="h1"> Live chat</h1>
+                            <div className={classes.chatHeader}>
+                                <h1 variant="h1"> Live chat | room: {room} </h1>
                             </div>
                             <div className={classes.chatBody}>
                                     <Typography variant='caption'> 
                                         Vous discutez maintenant avec un inconnu au hasard. Pourquoi ne pas faire connaissances !
                                     </Typography>
+                                    <ScrollToBottom classes={classes.messageContainer}>
                                     {messageList.map((data) => {
                                         return (
                                             <div
-                                                justify="flex-end"
                                                 className={classes.message}
                                                 id={username === data.author ? "you" : "other"}
                                             >
                                                 <div>
-                                                    <div className={classes.messageMeta}>
-                                                        <p id='time'>{data.time}</p>    
-                                                        <p id='author'>{data.author}</p>
+                                                    <div className={classes.messageMeta} id={username === data.author ? "you" : "other"}>
+                                                        <p id='time'>{data.time}</p>
+                                                        <p id='author'>{username === data.author ? "You" : data.author}</p>
                                                     </div>
                                                     <div className={classes.messageContent}>
-                                                        <h4 id={username === data.author ? "you" : "other"}>
-                                                             {data.message} 
+                                                        <h4 style={{textAlign: 'right'}} id={username === data.author ? "you" : "other"}>
+                                                            {data.message} 
                                                         </h4>
                                                     </div>
                                                 </div>
                                             </div>
                                             );
                                     })}
+                                    </ScrollToBottom>
                             </div>
                             <div className={classes.chatFooter}> 
                                 <TextField 
