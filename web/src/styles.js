@@ -55,27 +55,29 @@ const useStyles = makeStyles((theme) => ({
     },
     messageContainer: {
         display: 'flex',
-        height: '100px',
+        flexDirection: 'column',
+        height: '400px',
         overflowY: 'scroll',
-        overflowX: 'hidden',
+        border: ' 1px  ',
+        marginBottom: '10px'
     },
     message: {
         width: '100%',
         minHeight: '100px',
         padding: '10px',
-        "& #you": {
+        /*"& #you": {
             justifyContent: 'flex-end',
-        },
+        },*/
         "& #other": {
             justifyContent: 'flex-start',
         },
     },
     messageMeta: {
         display: 'flex',
-        "& #you": {
+        /*"& #you": {
             marginRight: '5px',
             justifyContent: 'flex-end',
-          },
+          },*/
         "& #other": {
             marginRight: '5px',
             justifyContent: 'flex-start',

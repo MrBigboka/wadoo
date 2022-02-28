@@ -76,28 +76,30 @@ const Chat = ({socket, username, room}) => {
                                     <Typography variant='caption'> 
                                         Vous discutez maintenant avec un inconnu au hasard. Pourquoi ne pas faire connaissances !
                                     </Typography>
-                                    <ScrollToBottom classes={classes.messageContainer}>
-                                    {messageList.map((data) => {
-                                        return (
-                                            <div
-                                                className={classes.message}
-                                                id={username === data.author ? "you" : "other"}
-                                            >
-                                                <div>
-                                                    <div className={classes.messageMeta} id={username === data.author ? "you" : "other"}>
-                                                        <p id='time'>{data.time}</p>
-                                                        <p id='author'>{username === data.author ? "You" : data.author}</p>
-                                                    </div>
-                                                    <div className={classes.messageContent}>
-                                                        <h4 style={{textAlign: 'right'}} id={username === data.author ? "you" : "other"}>
-                                                            {data.message} 
-                                                        </h4>
+                                    <div className={classes.messageContainer}>
+                                        <ScrollToBottom>
+                                        {messageList.map((data) => {
+                                            return (
+                                                <div
+                                                    className={classes.message}
+                                                    id={username === data.author ? "you" : "other"}
+                                                >
+                                                    <div>
+                                                        <div className={classes.messageMeta} id={username === data.author ? "you" : "other"}>
+                                                            <p id='time'>{data.time}</p>
+                                                            <p id='author'>{username === data.author ? "You" : data.author}</p>
+                                                        </div>
+                                                        <div className={classes.messageContent}>
+                                                            <h4 style={{textAlign: 'right'}} id={username === data.author ? "you" : "other"}>
+                                                                {data.message} 
+                                                            </h4>
+                                                        </div>
                                                     </div>
                                                 </div>
-                                            </div>
-                                            );
-                                    })}
-                                    </ScrollToBottom>
+                                                );
+                                        })}
+                                        </ScrollToBottom>
+                                    </div>
                             </div>
                             <div className={classes.chatFooter}> 
                                 <TextField 
