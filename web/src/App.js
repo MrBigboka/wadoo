@@ -6,7 +6,9 @@ import NavBar from './components/NavBar';
 import Footer from './components/Footer';
 export const UnContexte = React.createContext();
 
+
 export default function App() {
+
   return (
     <div className="container">
       <BrowserRouter>

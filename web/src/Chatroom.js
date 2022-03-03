@@ -79,7 +79,7 @@ const Chatroom = () => {
                         <Card className={classes.card}>
                             <CardContent className={classes.cardContent}>
                                 <Typography style={{ fontFamily: 'WillyWonka'}} className={classes.title} variant="h1" align="center">
-                                    chAtroom </Typography>
+                                    Chatroom </Typography>
                                 <div className="room-field" style={{ textAlign: 'center'}}>
                                     <TextField 
                                         name="name"

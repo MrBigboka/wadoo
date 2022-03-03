@@ -37,6 +37,7 @@ io.on("connection", (socket) => { //Cette fonction sert à donner un ID aux pers
     socket.on("join_room", (data) => { //Rejoindre une room
         socket.join(data);
         console.log(`L'utilisateur : ${socket.id} a rejoint la room: ${data}`);
+        console.log(io.sockets.adapter.rooms) //Liste des rooms voir lundi comment envoyer ca du coté client
     });
 
     socket.on("send_message", (data) => { //Envoi le message vers la room ou le message à été écrit
