@@ -4,10 +4,6 @@ import SendIcon from '@mui/icons-material/Send';
 import ScrollToBottom from 'react-scroll-to-bottom';
 import useStyles from '../styles';
 
-//CSS à refaire avec MUI je le fait plus tard dans la soirée ..
-//To do : CSS / Installer react-scroll-to-bottom ou pt avec MUI il y a un scroll to bottom 
-//Pt pas nécessaire si le chat est petit
-
 const Chat = ({socket, username, room}) => {
     const classes = useStyles(); 
     const [message, setMessage] = useState(""); 
@@ -76,30 +72,30 @@ const Chat = ({socket, username, room}) => {
                                     <Typography variant='caption'> 
                                         Vous discutez maintenant avec un inconnu au hasard. Pourquoi ne pas faire connaissances !
                                     </Typography>
-                                    <div className={classes.messageContainer}>
-                                        <ScrollToBottom>
-                                        {messageList.map((data) => {
-                                            return (
-                                                <div
-                                                    className={classes.message}
-                                                    id={username === data.author ? "you" : "other"}
-                                                >
-                                                    <div>
-                                                        <div className={classes.messageMeta} id={username === data.author ? "you" : "other"}>
-                                                            <p id='time'>{data.time}</p>
-                                                            <p id='author'>{username === data.author ? "You" : data.author}</p>
-                                                        </div>
-                                                        <div className={classes.messageContent}>
-                                                            <h4 style={{textAlign: 'right'}} id={username === data.author ? "you" : "other"}>
-                                                                {data.message} 
-                                                            </h4>
+                                    <ScrollToBottom>
+                                        <div className={classes.messageContainer}>
+                                            {messageList.map((data) => {
+                                                return (
+                                                    <div
+                                                        className={classes.message}
+                                                        id={username === data.author ? "you" : "other"}
+                                                    >
+                                                        <div>
+                                                            <div className={classes.messageMeta} id={username === data.author ? "you" : "other"}>
+                                                                <p id='time'>{data.time}</p>
+                                                                <p id='author'>{username === data.author ? "You" : data.author}</p>
+                                                            </div>
+                                                            <div className={classes.messageContent}>
+                                                                <h4 id={username === data.author ? "you" : "other"}>
+                                                                    {data.message} 
+                                                                </h4>
+                                                            </div>
                                                         </div>
                                                     </div>
-                                                </div>
-                                                );
-                                        })}
-                                        </ScrollToBottom>
-                                    </div>
+                                                    );
+                                            })}
+                                        </div>
+                                    </ScrollToBottom>
                             </div>
                             <div className={classes.chatFooter}> 
                                 <TextField 

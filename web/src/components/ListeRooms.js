@@ -1,39 +1,41 @@
 import React, {useState, useEffect} from 'react';
 import { Button, Grid, Card, CardContent, CardActions, Typography } from '@material-ui/core';
 import useStyles from '../styles';
+import io from 'socket.io-client';
 
-function ListeRooms({socket, username}) {
+function ListeRooms({username}) {
+    const PORT = 3001;
+    const socket = io.connect(`http://localhost:${PORT}`); //Pour connecter le frontend au backend
 
     const classes = useStyles(); 
     const [roomList, setRoomList] = useState([]);
-    const [webData, setWebData] = useState([]);
-    
+    const [webData , setWebData] = useState([]);    
+
     useEffect(() => {
         socket.on("receive_room", (data) => {
-            console.log('Data fetched', data)
+            console.log('Data fetched',data)
             setWebData(data);
         });
-        socket.on('error', (err) => {
-            console.error('Error happened', err);
-        })
-        // remove the socket listener when component left!
-        return () => {
-            socket.close();
-        }
+        socket.on("connect_error", () => {
+          console.error("socket error!");
+        socket.close();
+      });
+       // remove the socket listener when component left!
+       return () => {
+       socket.close();
+      }
     }, []);
     // second use effect if web data changed!
     useEffect(() => {
-        if (webData) {
-            // if webData is array of objects
-            setRoomList([...roomList, ...webData]);
-            //if webData is just objects    
-            //refresh the local state
-            setWebData([]);
-        }
-    }, [webData])
-    
-    
-
+      if(webData){
+        // if webData is array of objects
+        setRoomList([...roomList, ...webData]);
+        //if webData is just objects
+         setRoomList([...roomList, webData]);
+        //refresh the local state
+         setWebData([]);
+       }
+    },[webData])
 
     return (
         <>
