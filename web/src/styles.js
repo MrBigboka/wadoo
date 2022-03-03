@@ -41,7 +41,7 @@ const useStyles = makeStyles((theme) => ({
     },
     chatInput: {
         marginRight: '1pc',
-        width: '26pc'
+        width: '23pc'
     },
     cardContent: {
         flexGrow: 5,

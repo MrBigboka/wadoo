@@ -1,10 +1,11 @@
 import React, {useState, useEffect} from 'react';
-import { TextField, Button, Grid, Card, CardContent, CardMedia, Typography } from '@material-ui/core';
+import { TextField, Button, Grid, Card, CardContent, Typography } from '@material-ui/core';
 import SendIcon from '@mui/icons-material/Send';    
 import useStyles from '../styles';
 import VideoPlayer from './VideoPlayer';
+import IconButton from '@mui/material/IconButton';
 import ScrollToBottom from 'react-scroll-to-bottom';
-
+import SportsEsportsIcon from '@mui/icons-material/SportsEsports';
 
 //CSS à refaire avec MUI je le fait plus tard dans la soirée ..
 //To do : CSS / Installer react-scroll-to-bottom ou pt avec MUI il y a un scroll to bottom 
@@ -69,7 +70,7 @@ const Chat = ({socket, username, room}) => {
                                     <Typography variant='caption'> 
                                         Vous discutez maintenant avec un inconnu au hasard. Pourquoi ne pas faire connaissances !
                                     </Typography>
-                                    <ScrollToBottom>
+                                    <ScrollToBottom style={{height: 600, width: 400}}>
                                         <div className={classes.messageContainer}>
                                             {messageList.map((data) => {
                                                 return (
@@ -95,6 +96,9 @@ const Chat = ({socket, username, room}) => {
                                     </ScrollToBottom>
                             </div>
                             <div className={classes.chatFooter}> 
+                                <IconButton color="primary" aria-label="add an alarm">
+                                    <SportsEsportsIcon />
+                                </IconButton>
                                 <TextField 
                                     className={classes.chatInput}
                                     name="message"
