@@ -7,6 +7,8 @@ import VideoPlayer from './VideoPlayer'
 //CSS à refaire avec MUI je le fait plus tard dans la soirée ..
 //To do : CSS / Installer react-scroll-to-bottom ou pt avec MUI il y a un scroll to bottom 
 //Pt pas nécessaire si le chat est petit
+import ScrollToBottom from 'react-scroll-to-bottom';
+import useStyles from '../styles';
 
 const Chat = ({socket, username, room}) => {
     const classes = useStyles(); 
@@ -26,7 +28,7 @@ const Chat = ({socket, username, room}) => {
             };
 
             await socket.emit("send_message", messageData);
-            setMessageList((liste) => [...liste, messageData])
+            setMessageList((liste) => [...liste, messageData]);
             setMessage(""); //Le chat redeviendra vide
         }
     }
@@ -58,21 +60,38 @@ const Chat = ({socket, username, room}) => {
             <Grid item xs={8}>
                 <Card className={classes.Card}>
                     <CardContent className={classes.cardContent}>
-                        <div className="chat-window">
-                            <div className="chat-header">
-                                <h1 variant="h1"> Live chat</h1>
+                        <div className={classes.chatWidow}>
+                            <div className={classes.chatHeader}>
+                                <h1 variant="h1"> Live chat | room: {room} </h1>
                             </div>
-                            <div className="chat-body">
-                                <Typography variant='caption'> 
-                                    Vous discutez maintenant avec un inconnu au hasard. Pourquoi ne pas faire connaissances !
-                                </Typography>
-                                {messageList.map((data) => {
-                                    return (
-                                        <div className="message" id={username === data.author ? "you" : "other"}> 
-                                            <h5>{data.time} {data.author}: {data.message}</h5>
+                            <div className={classes.chatBody}>
+                                    <Typography variant='caption'> 
+                                        Vous discutez maintenant avec un inconnu au hasard. Pourquoi ne pas faire connaissances !
+                                    </Typography>
+                                    <ScrollToBottom>
+                                        <div className={classes.messageContainer}>
+                                            {messageList.map((data) => {
+                                                return (
+                                                    <div
+                                                        className={classes.message}
+                                                        id={username === data.author ? "you" : "other"}
+                                                    >
+                                                        <div>
+                                                            <div className={classes.messageMeta} id={username === data.author ? "you" : "other"}>
+                                                                <p id='time'>{data.time}</p>
+                                                                <p id='author'>{username === data.author ? "You" : data.author}</p>
+                                                            </div>
+                                                            <div className={classes.messageContent}>
+                                                                <h4 id={username === data.author ? "you" : "other"}>
+                                                                    {data.message} 
+                                                                </h4>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    );
+                                            })}
                                         </div>
-                                    )
-                                })}
+                                    </ScrollToBottom>
                             </div>
                             <div className={classes.chatFooter}> 
                                 <TextField 
