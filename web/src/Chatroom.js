@@ -6,6 +6,7 @@ import { Container, TextField, Button, CardContent, CssBaseline, Typography, Inp
 import useStyles from './styles';
 import { Stack } from '@mui/material';
 import AccountCircle from '@mui/icons-material/AccountCircle';
+import ListeRooms from './components/ListeRooms';
 
 const PORT = 3001;
 
@@ -18,20 +19,12 @@ const Chatroom = () => {
     const [username, setUsername] = useState("");
     const [room, setRoom] = useState("");
     const [showChat, setShowChat] = useState(false);
+    const [showRoomList, setShowRoomList] = useState(false);
     const [checked, setChecked] = useState(false);
     const [disable, setDisable] = useState(true);
     const [enable, setEnable] = useState(false);
-    const [roomList, setRoomList] = useState([]);
-
-    useEffect(() => {
-        socket.on("receive_room", (data) => {
-            setRoomList((liste) => [...liste, data]); 
-            //... permet de garder la liste de message et ajouter le nouveau message
-        })
-    }, [socket]);
 
     const handleChecked = (event) => {
-        console.log('état du bouton')
         setChecked(event.target.checked);
         if (event.target.checked === true) {
             handleEnable()
@@ -48,17 +41,17 @@ const Chatroom = () => {
         );
       }
 
-    const joinRoom = () => {
+    const createRoom = () => {
         if (username !== "" && room !== "") {
             socket.emit("join_room", room);
             setShowChat(true);
         }
     }
 
-    const createRoom = () => {
-        if (username !== "" && room !== "") {
-            socket.emit("add_room", room);
-            setShowChat(true);
+    const listeRoom = () => {
+        if (username !== "") {
+            socket.emit("room_list", 'roomList');
+            setShowRoomList(true);
         }
     }
 
@@ -81,7 +74,7 @@ const Chatroom = () => {
         <main>
             <div className={classes.container}>
             <Container maxWidth="md">
-                {!showChat ? (
+                { !showChat && !showRoomList && (
                     <div align='center'>
                         <Card className={classes.card}>
                             <CardContent className={classes.cardContent}>
@@ -143,15 +136,18 @@ const Chatroom = () => {
                                     spacing={1}
                                     justifyContent="center"
                                 >
-                                    <Button onClick={joinRoom} disabled={disable} color='primary' variant="contained"> Créer une room </Button>
-                                    <Button onClick={joinRoom} disabled={enable} color='primary' variant="outlined"> Liste des rooms </Button>
+                                    <Button onClick={createRoom} disabled={disable} color='primary' variant="contained"> Créer une room </Button>
+                                    <Button onClick={listeRoom} disabled={enable} color='primary' variant="outlined"> Liste des rooms </Button>
                                 </Stack>
-                        </CardContent>
+                            </CardContent>
                         </Card>
                     </div>
-                )
-                :(
-                <Chat socket={socket} username={username} room={room}/>
+                )}
+                { showRoomList && (
+                    <ListeRooms socket={socket} username={username}/>
+                )} 
+                { showChat && (
+                    <Chat socket={socket} username={username} room={room}/>
                 )}
             </Container>
         </div>
