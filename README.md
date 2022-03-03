@@ -1,3 +1,6 @@
+Pour lancé l'application correctement il faut ouvrir deux terminals et aller dans le répertoire server et lancé la commande npm inistall pour installer les dépendences et npm start pour lancé le serveur et faire la même chose pour le répertoire web.
+
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
