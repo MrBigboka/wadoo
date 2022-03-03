@@ -1,12 +1,13 @@
 import React, {useState} from 'react';
-import Chat from '../components/Chat';
+import Chat from './Chat';
 import { Button, Grid, Card, CardContent, CssBaseline, CardActions, Typography } from '@material-ui/core';
 import useStyles from '../styles';
 import io from 'socket.io-client';
 
+const PORT = 3001;
+const socket = io.connect(`http://localhost:${PORT}`); //Pour connecter le frontend au backend
+
 function ListeRooms({username}) {
-    const PORT = 3001;
-    const socket = io.connect(`http://localhost:${PORT}`); //Pour connecter le frontend au backend
 
     const classes = useStyles(); 
     const [roomList, setRoomList] = useState(['general', 'room1', 'room2', 'room3', 'room4', 'room5']);
