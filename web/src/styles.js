@@ -1,5 +1,5 @@
 import { makeStyles } from '@material-ui/core/styles';
-import { height } from '@mui/system';
+import { height, textAlign } from '@mui/system';
 
 const useStyles = makeStyles((theme) => ({
     container: {
@@ -31,7 +31,12 @@ const useStyles = makeStyles((theme) => ({
         color: '#2196f3'
     },
     chatFooter: {
-        marginTop: '24.5pc',
+        //marginTop: '24.5pc',
+    },
+
+    gridVideo: {
+
+        width: '500'
     },
 
     chatHeader: {
@@ -43,6 +48,7 @@ const useStyles = makeStyles((theme) => ({
     },
     cardContent: {
         flexGrow: 5,
+        
     },
     card: {
         width: '30pc',
@@ -55,8 +61,10 @@ const useStyles = makeStyles((theme) => ({
         display: 'flex',
     },
     VideoCard: {
-        flexGrow: 5,
+        flexGrow: 6,
         marginBottom: '2pc',
+
+
     },
     VideoPlayer: {
         height: '100%',

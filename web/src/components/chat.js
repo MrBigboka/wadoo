@@ -8,7 +8,6 @@ import VideoPlayer from './VideoPlayer'
 //To do : CSS / Installer react-scroll-to-bottom ou pt avec MUI il y a un scroll to bottom 
 //Pt pas nécessaire si le chat est petit
 import ScrollToBottom from 'react-scroll-to-bottom';
-import useStyles from '../styles';
 
 const Chat = ({socket, username, room}) => {
     const classes = useStyles(); 
@@ -38,13 +37,14 @@ const Chat = ({socket, username, room}) => {
             setMessageList((liste) => [...liste, data]); 
             //... permet de garder la liste de message et ajouter le nouveau message
         })  
+ 
     }, [socket]);
 
     return (
         <>
         <Grid container spacing={2}>
             <Grid item xs={4}> {/*WebRTC*/}
-                <Card className={classes.VideoCard}>
+            <Card className={classes.VideoCard}>
                     <CardContent className={classes.cardContent}>
                         <span> WebRTC Stranger </span>
                     </CardContent>
@@ -56,6 +56,7 @@ const Chat = ({socket, username, room}) => {
                     </CardContent>
                     <VideoPlayer />
                 </Card>
+         
             </Grid> {/*Chat*/}
             <Grid item xs={8}>
                 <Card className={classes.Card}>

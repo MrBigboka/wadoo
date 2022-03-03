@@ -2,13 +2,11 @@ import Context from '@mui/base/TabsUnstyled/TabsContext';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
-import { ContextProvider } from './SocketContext'
 
 ReactDOM.render(
-  <ContextProvider>
+
     <React.StrictMode>
       <App />
-    </React.StrictMode>
-  </ContextProvider>,
+    </React.StrictMode>,
   document.getElementById('root')
 );
