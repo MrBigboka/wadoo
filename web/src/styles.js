@@ -30,18 +30,12 @@ const useStyles = makeStyles((theme) => ({
         marginBottom: '3pc',
         color: '#2196f3'
     },
-<<<<<<< HEAD
-=======
     chatFooter: {
         //marginTop: '24.5pc',
     },
-
     gridVideo: {
-
         width: '500'
     },
-
->>>>>>> master
     chatHeader: {
         display: 'flex',
     },
@@ -73,10 +67,6 @@ const useStyles = makeStyles((theme) => ({
         height: '100%',
         width: '100%',
     },
-<<<<<<< HEAD
-=======
-
->>>>>>> master
     messageContainer: {
         display: 'flex',
         flexDirection: 'column',

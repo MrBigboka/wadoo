@@ -1,5 +1,6 @@
-import React, {useState, useEffect} from 'react';
-import { Button, Grid, Card, CardContent, CardActions, Typography } from '@material-ui/core';
+import React, {useState} from 'react';
+import Chat from '../components/Chat';
+import { Button, Grid, Card, CardContent, CssBaseline, CardActions, Typography } from '@material-ui/core';
 import useStyles from '../styles';
 import io from 'socket.io-client';
 
@@ -8,64 +9,61 @@ function ListeRooms({username}) {
     const socket = io.connect(`http://localhost:${PORT}`); //Pour connecter le frontend au backend
 
     const classes = useStyles(); 
-    const [roomList, setRoomList] = useState([]);
-    const [webData , setWebData] = useState([]);    
+    const [roomList, setRoomList] = useState(['general', 'room1', 'room2', 'room3', 'room4', 'room5']);
+    const [showChat, setShowChat] = useState(false);
+    const [selectedRoom, setSelectedRoom] = useState('')
 
-    useEffect(() => {
-        socket.on("receive_room", (data) => {
-            console.log('Data fetched',data)
-            setWebData(data);
-        });
-        socket.on("connect_error", () => {
-          console.error("socket error!");
-        socket.close();
-      });
-       // remove the socket listener when component left!
-       return () => {
-       socket.close();
-      }
-    }, []);
-    // second use effect if web data changed!
-    useEffect(() => {
-      if(webData){
-        // if webData is array of objects
-        setRoomList([...roomList, ...webData]);
-        //if webData is just objects
-         setRoomList([...roomList, webData]);
-        //refresh the local state
-         setWebData([]);
-       }
-    },[webData])
+
+    const joinRoom = () => {
+        if (username !== "" && selectedRoom !== "") {
+            console.log(selectedRoom)
+            socket.emit("join_room", selectedRoom);
+            setSelectedRoom(selectedRoom)
+            setShowChat(true);
+        }
+    }
 
     return (
         <>
-        {/*roomList !== undefined &&
-            <div>
-                <Grid container spacing={2}>
+        <CssBaseline/>
+            <main>
+                { !showChat ? (
+                    <div>
                     <Typography variant='h5'> Votre nom d'utilisateur est: <b> {username} </b> </Typography>
-                    <Grid item xs={4}> 
-                        <div> 
-                            {roomList.map((room) => (
-                                <Grid item key={room} xs={12} sm={6} md={4}>
-                                    <Card className={classes.card}>
-                                        <CardContent className={classes.cardContent}>
-                                            <Typography gutterBottom variant="h5">
-                                                {{room}}
-                                            </Typography>                                              
-                                            <CardActions>
-                                                <Button style={{ background:'#2E3B55'}} size="small" variant="contained">Rejoindre la room</Button>
-                                            </CardActions>
-                                        </CardContent>
-                                    </Card>
-                                </Grid>
-                            ))} 
+                    <br/>
+                        <div>
+                            <Grid container spacing={2}>
+                                {roomList.map((room) => (
+                                    <Grid item key={room} xs={12} sm={6} md={4}>
+                                        <Card> 
+                                            <CardContent className={classes.cardContent}>
+                                                <Typography variant='h5'>
+                                                    {room}
+                                                </Typography>                                              
+                                                <CardActions>
+                                                    <Button 
+                                                        size="small" variant="contained"
+                                                        onClick={() => {
+                                                            setSelectedRoom(room)
+                                                            joinRoom() 
+                                                        }} 
+                                                        >
+                                                            Rejoindre la room
+                                                    </Button>
+                                                </CardActions>
+                                            </CardContent>
+                                        </Card>
+                                    </Grid>
+                                ))}
+                            </Grid> 
                         </div>
-                    </Grid>
-                </Grid>
-            </div>
-                            */}
+                    </div>
+                ) : 
+                ( <Chat socket={socket} username={username} room={selectedRoom}/>)
+                }
+            </main>
         </>
     )
 }
 
-export default ListeRooms
+export default ListeRooms;
