@@ -1,17 +1,15 @@
 import React, {useState, useEffect} from 'react';
 import { TextField, Button, Grid, Card, CardContent, CardMedia, Typography } from '@material-ui/core';
 import SendIcon from '@mui/icons-material/Send';    
-<<<<<<< HEAD
 import useStyles from '../styles';
-import VideoPlayer from './VideoPlayer'
+import VideoPlayer from './VideoPlayer';
+import ScrollToBottom from 'react-scroll-to-bottom';
+
 
 //CSS à refaire avec MUI je le fait plus tard dans la soirée ..
 //To do : CSS / Installer react-scroll-to-bottom ou pt avec MUI il y a un scroll to bottom 
 //Pt pas nécessaire si le chat est petit
-=======
-import ScrollToBottom from 'react-scroll-to-bottom';
-import useStyles from '../styles';
->>>>>>> Miguel
+
 
 const Chat = ({socket, username, room}) => {
     const classes = useStyles(); 
@@ -49,55 +47,20 @@ const Chat = ({socket, username, room}) => {
             <Grid item xs={4}> {/*WebRTC*/}
                 <Card className={classes.VideoCard}>
                     <CardContent className={classes.cardContent}>
-                        <span> WebRTC Stranger </span>
+                        <span> Stranger </span>
                     </CardContent>
-<<<<<<< HEAD
                     <VideoPlayer />
-=======
-                    <CardMedia
-                        component="img"
-                        height="194"
-                        image="https://ak.picdn.net/shutterstock/videos/1034106779/thumb/1.jpg"
-                        alt="Paella dish"
-                    />
->>>>>>> Miguel
                 </Card>
                 <Card className={classes.VideoCard}>
                     <CardContent className={classes.cardContent}>
-                        <span> WebRTC User </span>
+                        <span> You </span>
                     </CardContent>
-<<<<<<< HEAD
                     <VideoPlayer />
-=======
-                    <CardMedia
-                        component="img"
-                        height="194"
-                        image="https://media.istockphoto.com/photos/smiling-attractive-young-lady-looking-talking-to-camera-at-home-picture-id1189198083?k=20&m=1189198083&s=612x612&w=0&h=n1f3g0mT4YAqSIOIzVHMQ5HV33awuhwgE5YcPjz2J2w="
-                        alt="Paella dish"
-                    />
->>>>>>> Miguel
                 </Card>
             </Grid> {/*Chat*/}
             <Grid item xs={8}>
                 <Card className={classes.Card}>
                     <CardContent className={classes.cardContent}>
-<<<<<<< HEAD
-                        <div className="chat-window">
-                            <div className="chat-header">
-                                <h1 variant="h1"> Live chat</h1>
-                            </div>
-                            <div className="chat-body">
-                                <Typography variant='caption'> 
-                                    Vous discutez maintenant avec un inconnu au hasard. Pourquoi ne pas faire connaissances !
-                                </Typography>
-                                {messageList.map((data) => {
-                                    return (
-                                        <div className="message" id={username === data.author ? "you" : "other"}> 
-                                            <h5>{data.time} {data.author}: {data.message}</h5>
-                                        </div>
-                                    )
-                                })}
-=======
                         <div className={classes.chatWidow}>
                             <div className={classes.chatHeader}>
                                 <h1 variant="h1"> Live chat | room: {room} </h1>
@@ -130,7 +93,6 @@ const Chat = ({socket, username, room}) => {
                                             })}
                                         </div>
                                     </ScrollToBottom>
->>>>>>> Miguel
                             </div>
                             <div className={classes.chatFooter}> 
                                 <TextField 

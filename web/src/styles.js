@@ -30,14 +30,8 @@ const useStyles = makeStyles((theme) => ({
         marginBottom: '3pc',
         color: '#2196f3'
     },
-<<<<<<< HEAD
-    chatFooter: {
-        marginTop: '24.5pc',
-
-=======
     chatHeader: {
         display: 'flex',
->>>>>>> Miguel
     },
     chatInput: {
         marginRight: '1pc',
@@ -60,11 +54,10 @@ const useStyles = makeStyles((theme) => ({
         flexGrow: 5,
         marginBottom: '2pc',
     },
-<<<<<<< HEAD
     VideoPlayer: {
         height: '100%',
         width: '100%',
-=======
+    },
     messageContainer: {
         display: 'flex',
         flexDirection: 'column',
@@ -141,7 +134,6 @@ const useStyles = makeStyles((theme) => ({
             wordbreak: 'break-word',  
             backgroundColor: '#D3D3D3',
         }
->>>>>>> Miguel
     },
 }));
 
